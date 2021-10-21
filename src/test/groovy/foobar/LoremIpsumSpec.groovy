@@ -1,19 +1,26 @@
 package foobar
 
-import io.micronaut.runtime.EmbeddedApplication
+import io.micronaut.context.annotation.Bean
+import io.micronaut.context.annotation.Replaces
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
-import spock.lang.Specification
 import jakarta.inject.Inject
+import spock.lang.Shared
+import spock.lang.Specification
 
 @MicronautTest
 class LoremIpsumSpec extends Specification {
 
+    @Bean
+    @Replaces(Ipsum)
+    Ipsum ipsum = new Ipsum()
+
     @Inject
-    EmbeddedApplication<?> application
+    Lorem lorem
 
-    void 'test it works'() {
-        expect:
-        application.running
+    def 'test'() {
+        when:
+        true
+        then:
+        true
     }
-
 }
