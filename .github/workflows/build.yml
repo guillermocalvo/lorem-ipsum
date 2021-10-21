@@ -1,0 +1,27 @@
+
+name: Build
+
+on:
+  push:
+    branches: ['**']
+
+jobs:
+  build:
+
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout from repo
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: zulu
+        java-package: jdk
+        java-version: 8
+
+    - name: Build
+      run: ./gradlew check --info
